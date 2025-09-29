@@ -29,6 +29,7 @@ public class Conta {
 
     	public void saque() {
     		boolean confirmado = false;
+    		if (this.confirmaSenhaTranzacao() == true) {
     		Scanner ler = new Scanner(System.in);
     		System.out.println("Coloque o valor do saque:");
     		double valor = ler.nextInt();
@@ -41,10 +42,14 @@ public class Conta {
     	
     		}else {
     			System.out.println("Saldo insuficiente.");
-    
-    		confirmado = false;}
+    		}
+    	}else{
+    		System.out.println("Senha incorreta");
+    		
     	}
-   	
+    
+  }
+   
     	
     	private boolean confirmaSenhaTranzacao() {
     		boolean confirmado = false;
@@ -83,7 +88,7 @@ public class Conta {
         				deposito();
     				}
     				if(navegar == 4) {
-        				deposito();
+        				transferencia();
     				}
     				
     			}while (navegar != 5);
@@ -96,42 +101,36 @@ public class Conta {
     	}
     	
     	private void deposito() {
+    		if (this.confirmaSenhaTranzacao() == true) {
         	System.out.println("Digite o valor de depósito");
         	Scanner ler = new Scanner(System.in);
         	double deposito = ler.nextDouble();
-        	saldo = saldo + deposito;
+        	this.saldo += saldo;
         	System.out.println("Agora seu saldo é: "+ saldo);
-    		
+    		}
     	}
     	
-    	private void tranferencia() {
-        	System.out.println("Digite o valor de tranferencia");
+    	private void transferencia() {
+    		if (this.confirmaSenhaTranzacao() == true) {
+        	System.out.println("Digite o valor de transferencia");
         	Scanner ler = new Scanner(System.in);
-        	double tranferencia = ler.nextDouble();
-        	saldo = saldo - tranferencia;
+        	double transferencia = ler.nextDouble();
+        	saldo -= transferencia;
         	System.out.println("Agora seu saldo é: "+ saldo);
-    		
+    		} else
+    			System.out.println("Senha incorreta");
     	
     	}   		
- }
+
+    public void dadosCliente (int senha) {
+    	if (this.senha == senha) {
+    		System.out.println("Dados do cliente " + "\n" + "Nome:" + this.cliente.nome + "\n" + "CPF:" + this.cliente.cpf + "\n" + "Telefone:" + this.cliente.telefone);
+    	} else {
+    		System.out.println("Senha inválida");
+    	}
+    }
+}
     
-    //Saldo
- 
-
-
-    //Saque
-
-
-
-    //Depósito
     
 
-
-    //Transferência
-   
-
-
-
-    // Método para exibir as informações da conta
-    
 
